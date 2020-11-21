@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+ 
+  <title>คำนวนค่างวดรถ</title>
+  <script src="/js/jquery-ui-1.12.1/jquery-ui.min.js"></script>
+  <script src="/js/jquery-ui-1.12.1/external/jquery/jquery.js"></script>
+  <script>   
+    $(document).ready(function(){  
+
+          $("#calstart").click( function (){
+                 var carone = $("#carone").val();
+                 var cartwo = $("#cartwo").val();
+                 var carthree = $("#carthree).val();
+                 var carf = $("#carf").val();
+                 var cartotal =   carone - cartwo;
+                 var carinterestmonth = (cartotal * parseFloat(carthree))/100;
+                 var carinterestall =   carinterestmonth * carone ;
+                 var allprice =     carrealprice+carinterestall;
+                  $(".res1").html(cartotal);
+                  $(".res2").html(carinterestmonth);
+                  $(".res3").html(allprice/carpay);
+          });
+    });
+</script>
+<div class="warp">
+   <p><span>ราคารถ (vat)</span><input type="text" id="carone">บาท</p>
+   <p><span>เงินดาวน์</span><input type="text" id="car2">บาท</p>
+  <p><span>อัตราดอกเบี้ย / ปี</span><input type="text" id="carinterest">บาท</p>
+       <form action="Checkbox.html" method="set" name="car1>
+        <input type="checkbox" name="mon" value="1 ปี"> ระยะเวลาผ่อนชำระ <br>
+        <input type="checkbox" name="mon" value="1 ปี">  1ปี (12เดือน)<br>
+        <input type="checkbox" name="mon" value="2 ปี">  2ปี (24เดือน)<br>
+        <input type="checkbox" name="mon" value="3 ปี">  3ปี (36เดือน)<br>
+        <input type="checkbox" name="mon" value="4 ปี">  4ปี (48เดือน)<br>
+        <input type="checkbox" name="mon" value="5 ปี">  5ปี (56เดือน)<br>
+        <p id="ans"></p>
+
+
+  <button> <a href="#" id="calstart">คำนวณ</a>  </button>
+   <hr>
+   <div>
+       <p>ยอดจัดสินเชื่อ : <span class="res1"></span></p>
+       <p>ดอกเบี้ยต่อปี : <span class="res2"></span></p>
+       <p>ผ่อนเดือนละ : <span class="res3"></span></p>
+       <p>ยอดรวมที่ต้องจ่าย : <span class="res3"></span></p>
+   </div>
+
+</div>
+
+
+</head>
+</html>
+
+
+
+
+
+
+

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homework</title>
+    <!--<link rel="stylesheet" href="css/mystyle.css">-->
+    <style type="text/css">
+      body { color: white; background: #40E0D0; }
+      h1 {color: white; background:#4682B4; font-size:500%;}
+      #poi {background: white; font-family: Georgia, 'Times New Roman', Times, serif; font-size: 100;}
+      body, a, a:hover { cursor:url(http://www.drikoti.net/Goodies/Cursor/News/Gifs/04.gif), auto }
+    </style>
+</head>
+<body>
+  
+  <script>
+    //Here you can add your own picture for snow. Just change the url
+    var snowsrc="http://i13.servimg.com/u/f13/11/52/70/02/snowba10.png"
+    //how many snowflakes there will be (currently 12)
+    var no =47;
+    //How fast will the snow disappear (0 is never)
+    var hidesnowtime = 0;
+    //The height the snow will reach before it disappears ("windowheight" or "pageheight")
+    var snowdistance = "pageheight";
+    ///////////////////////////////End of Settings///////////////////////////////////
+    var ie4up = (document.all) ? 1 : 0;
+    var ns6up = (document.getElementById&&!document.all) ? 1 : 0;
+    function iecompattest()
+    {
+    return (document.compatMode && document.compatMode!="BackCompat")? document.documentElement : document.body
+    }
+    var dx, xp, yp;
+    var am, stx, sty;
+    var i, doc_width = 800, doc_height = 600;
+    if (ns6up)
+    {
+    doc_width = self.innerWidth;
+    doc_height = self.innerHeight;
+    }
+    else
+    if (ie4up)
+    {
+    doc_width = document.body.clientWidth;
+    doc_height = document.body.clientHeight;
+    }
+    dx = new Array();
+    xp = new Array();
+    yp = new Array();
+    am = new Array();
+    stx = new Array();
+    sty = new Array();
+    for (i = 0; i < no; ++ i)
+    {
+    dx[i] = 0;
+    xp[i] = Math.random()*(doc_width-50);
+    yp[i] = Math.random()*doc_height;
+    am[i] = Math.random()*20;
+    stx[i] = 0.02 + Math.random()/10;
+    sty[i] = 0.7 + Math.random();
+    if (ie4up||ns6up)
+    {
+    if (i == 0)
+    {
+    document.write("<div id=\"dot"+ i +"\" style=\"POSITION: absolute; Z-INDEX: "+ i +"; VISIBILITY: visible; TOP: 15px; LEFT: 15px;\"><a href=\"http://rftactical.darkbb.com/index.htm\"><img src='"+snowsrc+"' border=\"0\"><\/a><\/div>");
+    }
+    else
+    {
+    document.write("<div id=\"dot"+ i +"\" style=\"POSITION: absolute; Z-INDEX: "+ i +"; VISIBILITY: visible; TOP: 15px; LEFT: 15px;\"><img src='"+snowsrc+"' border=\"0\"><\/div>");
+    }
+    }
+    }
+    function snowIE_NS6()
+    {
+    doc_width = ns6up?window.innerWidth-10 : iecompattest().clientWidth-10;
+    doc_height=(window.innerHeight && snowdistance=="windowheight")? window.innerHeight : (ie4up && snowdistance=="windowheight")? iecompattest().clientHeight : (ie4up && !window.opera && snowdistance=="pageheight")? iecompattest().scrollHeight : iecompattest().offsetHeight;
+    for (i = 0; i < no; ++ i)
+    {
+    yp[i] += sty[i];
+    if (yp[i] > doc_height-50)
+    {
+    xp[i] = Math.random()*(doc_width-am[i]-30);
+    yp[i] = 0;
+    stx[i] = 0.02 + Math.random()/10;
+    sty[i] = 0.7 + Math.random();
+    }
+    dx[i] += stx[i];
+    document.getElementById("dot"+i).style.top=yp[i]+"px";
+    document.getElementById("dot"+i).style.left=xp[i] + am[i]*Math.sin(dx[i])+"px";
+    }
+    snowtimer=setTimeout("snowIE_NS6()", 10);
+    }
+    function hidesnow()
+    {
+    if (window.snowtimer) clearTimeout(snowtimer)
+    for (i=0; i<no; i++) document.getElementById("dot"+i).style.visibility="hidden"
+    }
+    
+    if (ie4up||ns6up)
+    {
+    snowIE_NS6();
+    if (hidesnowtime>0)
+    setTimeout("hidesnow()", hidesnowtime*1000)
+    }
+    </script>
+    <script type="text/javascript">
+      // <![CDATA[
+      var colours=new Array("#00ADFF", "#00ADFF", "#00ADFF", "#00ADFF", "#00ADFF"); // colours for top, right, bottom and left borders and background of bubbles
+      var bubbles=80; // maximum number of bubbles on screen
+      /****************************
+      * JavaScript Bubble Cursor *
+      * (c) 2010 mf2fm web-design *
+      * http://www.mf2fm.com/rv *
+      * DON'T EDIT BELOW THIS BOX *
+      ****************************/
+      var x=ox=400;
+      var y=oy=300;
+      var swide=800;
+      var shigh=600;
+      var sleft=sdown=0;
+      var bubb=new Array();
+      var bubbx=new Array();
+      var bubby=new Array();
+      var bubbs=new Array();
+      window.onload=function() { if (document.getElementById) {
+      var rats, div;
+      for (var i=0; i<bubbles; i++) {
+      rats=createDiv("3px", "3px");
+      rats.style.visibility="hidden";
+      div=createDiv("auto", "auto");
+      rats.appendChild(div);
+      div=div.style;
+      div.top="1px";
+      div.left="0px";
+      div.bottom="1px";
+      div.right="0px";
+      div.borderLeft="1px solid "+colours[3];
+      div.borderRight="1px solid "+colours[1];
+      div=createDiv("auto", "auto");
+      rats.appendChild(div);
+      div=div.style;
+      div.top="0px";
+      div.left="1px";
+      div.right="1px";
+      div.bottom="0px"
+      div.borderTop="1px solid "+colours[0];
+      div.borderBottom="1px solid "+colours[2];
+      div=createDiv("auto", "auto");
+      rats.appendChild(div);
+      div=div.style;
+      div.left="1px";
+      div.right="1px";
+      div.bottom="1px";
+      div.top="1px";
+      div.backgroundColor=colours[4];
+      div.opacity=0.5;
+      if (document.all) div.filter="alpha(opacity=50)";
+      document.body.appendChild(rats);
+      bubb[i]=rats.style;
+      }
+      set_scroll();
+      set_width();
+      bubble();
+      }}
+      
+      
+      function bubble() {
+      var c;
+      if (x!=ox || y!=oy) {
+      ox=x;
+      oy=y;
+      for (c=0; c<bubbles; c++) if (!bubby[c]) {
+      bubb[c].left=(bubbx[c]=x)+"px";
+      bubb[c].top=(bubby[c]=y)+"px";
+      bubb[c].width="3px";
+      bubb[c].height="3px"
+      bubb[c].visibility="visible";
+      bubbs[c]=3;
+      break;
+      }
+      }
+      for (c=0; c<bubbles; c++) if (bubby[c]) update_bubb(c);
+      setTimeout("bubble()", 40);
+      }
+      function update_bubb(i) {
+      if (bubby[i]) {
+      bubby[i]-=bubbs[i]/2+i%2;
+      bubbx[i]+=(i%5-2)/5;
+      if (bubby[i]>sdown && bubbx[i]>0) {
+      if (Math.random()<bubbs[i]/shigh*2 && bubbs[i]++<8) {
+      bubb[i].width=bubbs[i]+"px";
+      bubb[i].height=bubbs[i]+"px";
+      }
+      bubb[i].top=bubby[i]+"px";
+      bubb[i].left=bubbx[i]+"px";
+      }
+      else {
+      bubb[i].visibility="hidden";
+      bubby[i]=0;
+      return;
+      }
+      }
+      }
+      document.onmousemove=mouse;
+      function mouse(e) {
+      set_scroll();
+      y=(e)?e.pageY:event.y+sleft;
+      x=(e)?e.pageX:event.x+sdown; }
+      window.onresize=set_width;
+      function set_width() {
+      if (document.documentElement && document.documentElement.clientWidth) {
+      swide=document.documentElement.clientWidth;
+      shigh=document.documentElement.clientHeight;
+      }
+      else if (typeof(self.innerHeight)=="number") {
+      swide=self.innerWidth;
+      shigh=self.innerHeight;
+      }
+      else if (document.body.clientWidth) {
+      swide=document.body.clientWidth;
+      shigh=document.body.clientHeight;
+      }
+      else {
+      swide=800;
+      shigh=600;
+      }
+      }
+      window.onscroll=set_scroll;
+      function set_scroll() {
+      if (typeof(self.pageYOffset)=="number") {
+      sdown=self.pageYOffset;
+      sleft=self.pageXOffset;
+      }
+      else if (document.body.scrollTop || document.body.scrollLeft) {
+      sdown=document.body.scrollTop;
+      sleft=document.body.scrollLeft;
+      }
+      else if (document.documentElement && (document.documentElement.scrollTop || document.documentElement.scrollLeft)) {
+      sleft=document.documentElement.scrollLeft;
+      sdown=document.documentElement.scrollTop;
+      }
+      else {
+      sdown=0;
+      sleft=0;
+      }
+      }
+      function createDiv(height, width) {
+      var div=document.createElement("div");
+      div.style.position="absolute";
+      div.style.height=height;
+      div.style.width=width;
+      div.style.overflow="hidden";
+      return (div);
+      }
+      // ]]>
+      </script>
+
+    <div class="header" id="poi">
+       <center> <h1>
+            Homework <p>&#128512; &#128512; &#128516; &#128525; &#128151;</p>
+            
+      <form action="#">
+        
+      </form>
+        
+        
+      </div>
+      <p><hr></p>
+      <div class="topnav" id="poi"><center>
+      
+        <a href="login.html"> Login </a> <p></p>
+        <a href="MyForm.html"> MYForm</a> <p></p>
+        <a href="TestCheckbox.html"> Checbox</a><p></p>
+        <a href="MyTestQ.html">jQuery Effects(Sliding)</a><p></p>
+        <a href="proj.html">Project</a> <p></p>
+        <a href="BMI.html"> BMI </a><p> </p>
+        <a href="mat.html"> คำนวณค่างวดรถ </a> <p></p>
+        <a href="MyTestQ1.html"> เขียนโปรแกรมด้วย jQuery </a> <p></p>
+    
+
+       
+  
+      </div>
+
+    
+    
+    </div></center>
+    
+</body>
+</html>
